@@ -140,6 +140,12 @@
         }
 
     </style>
+
+
+    <script type="text/javascript" src="js/lib/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/lib/Dexie.js"></script>
+    <script type="text/javascript" src="js/constants.js"></script>
+    <script type="text/javascript" src="js/options.js"></script>
 </head>
 <body>
 <div id="loading" class="hide"><img src="/images/ajax-loader.gif"/></div>
@@ -150,13 +156,13 @@
     <div id="optionsWrapper">
         <form>
             <ul id="mainMenu" class="menu">
-                <li><a contentID="0" href="#" class="active" msg="jobAlert">Job Alert</a></li>
-                <li><a contentID="1" href="#" msg="notifications">Notifications</a></li>
+                <li><a contentID="0" href="#" msg="jobAlert">Job Alert</a></li>
+                <li><a contentID="1" href="#" class="active" msg="notifications">Notifications</a></li>
                 <li><a contentID="2" href="#" msg="accountsAndLabels">Accounts</a></li>
                 <li><a contentID="3" href="#" msg="general">General</a></li>
             </ul>
             <div id="tabContentWrapper">
-                <div id="content_0" class="tabContent" style="display: block;">
+                <div id="content_0" class="tabContent" style="display: none;">
                     <fieldset class="options">
                         <legend><span msg="searchCondition">Conditions</span></legend>
                         <div class="subOptions">
@@ -322,7 +328,7 @@
                         <br />
                     </fieldset>
                 </div>
-                <div id="content_1" class="tabContent hide">
+                <div id="content_1" class="tabContent" style="display: block">
                     <fieldset class="options">
                         <legend><input type="checkbox" id="soundNotification" pref="soundNotification"> <label
                                 class="section" for='soundNotification' msg="notificationSound">Sound
