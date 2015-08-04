@@ -31,27 +31,113 @@
             margin-top: 20px;
             text-align: center
         }
-        #main input {margin-top: 5px;}
-        #optionsWrapper a, #optionsWrapper a:visited {border-bottom: 1px dotted black}
-        #optionsWrapper a, #optionsWrapper a:visited, #jMessage a {color:#427fed}
 
-        ul.menu {padding:0;margin:0;list-style-type: none;min-width:100px}
-        ul.menu li {padding: 0;list-style: none;display:inline-block}
-        ul.menu li a {-webkit-transition:background-color .281s;line-height: 25px;border-radius:5px 5px 0 0;padding:6px 8px 8px 8px;border: 0 !important;background: #ddd;font-size:100%;font-weight: bold;color:black !important}
-        ul.menu li a:hover, ul.menu li a.active {background-color:white;color:white;text-shadow:none}
+        #main input {
+            margin-top: 5px;
+        }
 
-        #tabContentWrapper {min-width:700px;text-align:left;display:inline-block;color:#000;background-color:#fff;box-shadow:3px 3px 5px #555;border-radius:5px;margin:0 auto}
-        .tabContent {min-width:90%;min-height:250px;margin-left:0px;float: left;padding:20px 30px 30px 30px}
-        fieldset {border-radius:5px}
-        legend {padding-right:5px}
-        fieldset.options {padding-bottom:5px;margin-bottom:24px;border:1px solid #ccc;xxbackground: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#f3f3f3));box-shadow:2px 2px 5px #555}
-        fieldset > legend {padding-bottom:5px;border-radius:4px;font-size:120%}
-        fieldset .subOptions input {margin-left:6px}
+        #optionsWrapper a, #optionsWrapper a:visited {
+            border-bottom: 1px dotted black
+        }
 
-        .sound {width:130px;display:inline-block}
-        input[type='range'] {height:10px;width:75px}
-        .playWrapper {border:0 !important;padding:9px}
-        .playWrapper:active img {-webkit-filter:drop-shadow(1px 1px 3px #fff)}
+        #optionsWrapper a, #optionsWrapper a:visited, #jMessage a {
+            color: #427fed
+        }
+
+        ul.menu {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            min-width: 100px
+        }
+
+        ul.menu li {
+            padding: 0;
+            list-style: none;
+            display: inline-block
+        }
+
+        ul.menu li a {
+            -webkit-transition: background-color .281s;
+            line-height: 25px;
+            border-radius: 5px 5px 0 0;
+            padding: 6px 8px 8px 8px;
+            border: 0 !important;
+            background: #ddd;
+            font-size: 100%;
+            font-weight: bold;
+            color: black !important
+        }
+
+        ul.menu li a:hover, ul.menu li a.active {
+            background-color: white;
+            color: white;
+            text-shadow: none
+        }
+
+        #tabContentWrapper {
+            min-width: 700px;
+            text-align: left;
+            display: inline-block;
+            color: #000;
+            background-color: #fff;
+            box-shadow: 3px 3px 5px #555;
+            border-radius: 5px;
+            margin: 0 auto
+        }
+
+        .tabContent {
+            min-width: 90%;
+            min-height: 250px;
+            margin-left: 0px;
+            float: left;
+            padding: 20px 30px 30px 30px
+        }
+
+        fieldset {
+            border-radius: 5px
+        }
+
+        legend {
+            padding-right: 5px
+        }
+
+        fieldset.options {
+            padding-bottom: 5px;
+            margin-bottom: 24px;
+            border: 1px solid #ccc;
+            xxbackground: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#f3f3f3));
+            box-shadow: 2px 2px 5px #555
+        }
+
+        fieldset > legend {
+            padding-bottom: 5px;
+            border-radius: 4px;
+            font-size: 120%
+        }
+
+        fieldset .subOptions input {
+            margin-left: 6px
+        }
+
+        .sound {
+            width: 130px;
+            display: inline-block
+        }
+
+        input[type='range'] {
+            height: 10px;
+            width: 75px
+        }
+
+        .playWrapper {
+            border: 0 !important;
+            padding: 9px
+        }
+
+        .playWrapper:active img {
+            -webkit-filter: drop-shadow(1px 1px 3px #fff)
+        }
 
     </style>
 </head>
@@ -64,51 +150,323 @@
     <div id="optionsWrapper">
         <form>
             <ul id="mainMenu" class="menu">
-                <li><a contentID="0" href="#" class="active" msg="notifications">Notifications</a></li>
-                <li><a contentID="1" href="#" msg="accountsAndLabels">Accounts</a></li>
-                <li><a contentID="2" href="#" msg="general">General</a></li>
+                <li><a contentID="0" href="#" class="active" msg="jobAlert">Job Alert</a></li>
+                <li><a contentID="1" href="#" msg="notifications">Notifications</a></li>
+                <li><a contentID="2" href="#" msg="accountsAndLabels">Accounts</a></li>
+                <li><a contentID="3" href="#" msg="general">General</a></li>
             </ul>
             <div id="tabContentWrapper">
-                <div id="content_0" class="tabContent">
+                <div id="content_0" class="tabContent" style="display: block;">
                     <fieldset class="options">
-                        <legend><input type="checkbox" id="soundNotification" pref="soundNotification"> <label class="section" for='soundNotification' msg="notificationSound">Sound notifications</label></legend>
+                        <legend><span msg="searchCondition">Conditions</span></legend>
+                        <div class="subOptions">
+                            <span>Notify Me Whenever</span>
+                            <input >
+                        </div>
+                        <div class="subOptions">
+                            <span>Jobs In (Category)*</span>
+                            <select>
+                                <option value="0">All categories</option>
+                                <option value="1">Accounting</option>
+                                <option value="58">Auditing</option>
+                                <option value="67">Automotive</option>
+                                <option value="2">Administrative/Clerical</option>
+                                <option value="3">Advertising/Promotion/PR</option>
+                                <option value="4">Agriculture/Forestry</option>
+                                <option value="5">Architecture/Interior Design</option>
+                                <option value="22">Health/Medical Care</option>
+                                <option value="10">Arts/Design</option>
+                                <option value="42">Banking</option>
+                                <option value="43">Chemical/Biochemical</option>
+                                <option value="7">Civil/Construction</option>
+                                <option value="68">Industrial Products</option>
+                                <option value="8">Consulting</option>
+                                <option value="11">Customer Service</option>
+                                <option value="12">Education/Training</option>
+                                <option value="64">Electrical/Electronics</option>
+                                <option value="15">Entry level</option>
+                                <option value="16">Environment/Waste Services</option>
+                                <option value="17">Executive management</option>
+                                <option value="18">Expatriate Jobs in Vietnam</option>
+                                <option value="19">Export-Import</option>
+                                <option value="54">Food &amp; Beverage</option>
+                                <option value="59">Finance/Investment</option>
+                                <option value="63">Fashion/Lifestyle</option>
+                                <option value="66">High Technology</option>
+                                <option value="23">Human Resources</option>
+                                <option value="24">Insurance</option>
+                                <option value="47">Interpreter/Translator</option>
+                                <option value="55">IT - Hardware/Networking</option>
+                                <option value="57">Internet/Online Media</option>
+                                <option value="35">IT - Software</option>
+                                <option value="25">Legal/Contracts</option>
+                                <option value="62">Luxury Goods</option>
+                                <option value="65">Mechanical</option>
+                                <option value="27">Marketing</option>
+                                <option value="21">NGO/Non-Profit</option>
+                                <option value="28">Oil/Gas</option>
+                                <option value="6">Pharmaceutical/Biotech</option>
+                                <option value="69">Planning/Projects</option>
+                                <option value="26">Production/Process</option>
+                                <option value="49">Purchasing/Supply Chain</option>
+                                <option value="30">Real Estate</option>
+                                <option value="32">Retail/Wholesale</option>
+                                <option value="33">Sales</option>
+                                <option value="34">Sales Technical</option>
+                                <option value="56">Securities &amp; Trading</option>
+                                <option value="41">Telecommunications</option>
+                                <option value="51">Temporary/Contract</option>
+                                <option value="52">Textiles/Garments/Footwear</option>
+                                <option value="37">Airlines/Tourism/Hotel</option>
+                                <option value="48">TV/Media/Newspaper</option>
+                                <option value="36">Freight/Logistics</option>
+                                <option value="53">Warehouse</option>
+                                <option value="70">QA/QC</option>
+                                <option value="71">Overseas Jobs</option>
+                                <option value="39">Other</option>
+                            </select>
+                        </div>
+                        <div class="subOptions">
+                            <span>Job Level*</span>
+                            <select>
+                                <option value="0" selected="selected">All job levels</option>
+                                <option value="1">New Grad/Entry Level/Internship</option>
+                                <option value="5">Experienced (Non-Manager)</option>
+                                <option value="6">Team Leader/Supervisor</option>
+                                <option value="7">Manager</option>
+                                <option value="10">Vice Director</option>
+                                <option value="3">Director</option>
+                                <option value="4">CEO</option>
+                                <option value="8">Vice President</option>
+                                <option value="9">President</option>
+                            </select>
+                        </div>
+                        <div class="subOptions">
+                            <span>That Are Located In</span>
+                            <select>
+                                <option value="0">All locations</option>
+                                <option value="29">Ho Chi Minh</option>
+                                <option value="24">Ha Noi</option>
+                                <option value="71">Mekong Delta</option>
+                                <option value="2">An Giang</option>
+                                <option value="3">Ba Ria - Vung Tau</option>
+                                <option value="4">Bac Can</option>
+                                <option value="5">Bac Giang</option>
+                                <option value="6">Bac Lieu</option>
+                                <option value="7">Bac Ninh</option>
+                                <option value="8">Ben Tre</option>
+                                <option value="9">Bien Hoa</option>
+                                <option value="10">Binh Dinh</option>
+                                <option value="11">Binh Duong</option>
+                                <option value="12">Binh Phuoc</option>
+                                <option value="13">Binh Thuan</option>
+                                <option value="14">Ca Mau</option>
+                                <option value="15">Can Tho</option>
+                                <option value="16">Cao Bang</option>
+                                <option value="17">Da Nang</option>
+                                <option value="18">Dac Lac</option>
+                                <option value="69">Dien Bien</option>
+                                <option value="19">Dong Nai</option>
+                                <option value="20">Dong Thap</option>
+                                <option value="21">Gia Lai</option>
+                                <option value="22">Ha Giang</option>
+                                <option value="23">Ha Nam</option>
+                                <option value="25">Ha Tay</option>
+                                <option value="26">Ha Tinh</option>
+                                <option value="27">Hai Duong</option>
+                                <option value="28">Hai Phong</option>
+                                <option value="30">Hoa Binh</option>
+                                <option value="31">Hue</option>
+                                <option value="32">Hung Yen</option>
+                                <option value="33">Khanh Hoa</option>
+                                <option value="34">Kon Tum</option>
+                                <option value="35">Lai Chau</option>
+                                <option value="36">Lam Dong</option>
+                                <option value="37">Lang Son</option>
+                                <option value="38">Lao Cai</option>
+                                <option value="39">Long An</option>
+                                <option value="40">Nam Dinh</option>
+                                <option value="41">Nghe An</option>
+                                <option value="42">Ninh Binh</option>
+                                <option value="43">Ninh Thuan</option>
+                                <option value="44">Phu Tho</option>
+                                <option value="45">Phu Yen</option>
+                                <option value="46">Quang Binh</option>
+                                <option value="47">Quang Nam</option>
+                                <option value="48">Quang Ngai</option>
+                                <option value="49">Quang Ninh</option>
+                                <option value="50">Quang Tri</option>
+                                <option value="51">Soc Trang</option>
+                                <option value="52">Son La</option>
+                                <option value="53">Tay Ninh</option>
+                                <option value="54">Thai Binh</option>
+                                <option value="55">Thai Nguyen</option>
+                                <option value="56">Thanh Hoa</option>
+                                <option value="57">Thua Thien-Hue</option>
+                                <option value="58">Tien Giang</option>
+                                <option value="59">Tra Vinh</option>
+                                <option value="60">Tuyen Quang</option>
+                                <option value="61">Kien Giang</option>
+                                <option value="62">Vinh Long</option>
+                                <option value="63">Vinh Phuc</option>
+                                <option value="65">Yen Bai</option>
+                                <option value="66">Other</option>
+                                <option value="70">International</option>
+                                <option value="72">Hau Giang</option>
+                            </select>
+                        </div>
+                        <div class="subOptions">
+                            <span>With Salary Of</span>
+                            <input >
+                        </div>
+                        <br />
+                    </fieldset>
+                </div>
+                <div id="content_1" class="tabContent hide">
+                    <fieldset class="options">
+                        <legend><input type="checkbox" id="soundNotification" pref="soundNotification"> <label
+                                class="section" for='soundNotification' msg="notificationSound">Sound
+                            notifications</label></legend>
                         <div class="subOptions">
                             <div class="nowrap"><span msg="sound">Sound</span>: <span class='defaultSoundOptionWrapper'>
-                                <select class="sound">
-                                    <option value="bug.ogg">Bug</option>
-                                    <option value="chime.ogg">Chime</option>
-                                    <option value="ding.ogg">Ding</option>
-                                    <option value="electronicdrops.ogg">Electronic drops</option>
-                                    <option value="fallingbeep.ogg">Falling beep</option>
-                                    <option value="pianohappy.ogg">Piano Happy</option>
-                                    <option value="ultranova.ogg">Ultranova</option>
-                                    <option value="whoppii.ogg">Whoppii</option>
-                                    <option value="yeahaha.ogg">Yeahaha</option>
-                                </select>
-                            </span> <span class="rangeLabel" msg="volume">Volume</span>: <input id="notificationSoundVolume" pref="notificationSoundVolume" type="range"> <a id="playNotificationSound" href="javascript:;" title="Play notification sound" class="playWrapper"><img class="play" src="/images/play.png" alt="Play" /></a></div>
+                                    <select class="sound">
+                                        <option value="bug.ogg">Bug</option>
+                                        <option value="chime.ogg">Chime</option>
+                                        <option value="ding.ogg">Ding</option>
+                                        <option value="electronicdrops.ogg">Electronic drops</option>
+                                        <option value="fallingbeep.ogg">Falling beep</option>
+                                        <option value="pianohappy.ogg">Piano Happy</option>
+                                        <option value="ultranova.ogg">Ultranova</option>
+                                        <option value="whoppii.ogg">Whoppii</option>
+                                        <option value="yeahaha.ogg">Yeahaha</option>
+                                    </select>
+                                </span> <span class="rangeLabel" msg="volume">Volume</span>: <input
+                                    id="notificationSoundVolume" pref="notificationSoundVolume" type="range"> <a
+                                    id="playNotificationSound" href="javascript:;" title="Play notification sound"
+                                    class="playWrapper"><img class="play" src="/images/play.png" alt="Play"/></a></div>
                         </div>
+                        <br/>
                     </fieldset>
                     <fieldset class="options">
-                        <legend><input type="checkbox" id="desktopNotification" pref="desktopNotification"> <label class="section" for='desktopNotification' msg="showDesktopNotifications">Desktop notifications</label></legend>
+                        <legend><input type="checkbox" id="desktopNotification" pref="desktopNotification"> <label
+                                class="section" for='desktopNotification' msg="showDesktopNotifications">Desktop
+                            notifications</label></legend>
                         <div class="subOptions">
                             <span msg="closeAfterX">Close after</span>:
                             <select id="dn_timeout" pref="dn_timeout">
                                 <option id="dn_timeout_3000" value="3000" msg="Xseconds" msgarg1="3">3 seconds</option>
                                 <option id="dn_timeout_5000" value="5000" msg="Xseconds" msgarg1="5">5 seconds</option>
-                                <option id="dn_timeout_10000" value="10000" msg="Xseconds" msgarg1="10">10 seconds</option>
-                                <option id="dn_timeout_15000" value="15000" msg="Xseconds" msgarg1="15">15 seconds</option>
+                                <option id="dn_timeout_10000" value="10000" msg="Xseconds" msgarg1="10">10 seconds
+                                </option>
+                                <option id="dn_timeout_15000" value="15000" msg="Xseconds" msgarg1="15">15 seconds
+                                </option>
                                 <option id="dn_timeout_60000" value="60000" msg="Xminute" msgarg1="1">1 minute</option>
-                                <option id="dn_timeout_900000" value="900000" msg="Xminutes" msgarg1="15">15 minutes</option>
+                                <option id="dn_timeout_900000" value="900000" msg="Xminutes" msgarg1="15">15 minutes
+                                </option>
                                 <option id="dn_timeout_3600000" value="3600000" msg="Xhour" msgarg1="1">1 hour</option>
-                                <option id="dn_timeout_18000000" value="18000000" msg="Xhours" msgarg1="5">5 hours</option>
+                                <option id="dn_timeout_18000000" value="18000000" msg="Xhours" msgarg1="5">5 hours
+                                </option>
                                 <option id="dn_timeout_0" value="0" msg="never">Never</option>
                             </select>
                         </div>
-                        <div class="subOptions"><input type="checkbox" id="doNotShowNotificationIfVNWTabActive" pref="doNotShowNotificationIfVNWTabActive"> <label for="doNotShowNotificationIfVNWTabActive" msg="doNotShowNotificationIfGmailTabActive">Do not show notification if you're already in your VietnamWorks tab</label></div>
+                        <div class="subOptions"><input type="checkbox" id="doNotShowNotificationIfVNWTabActive"
+                                                       pref="doNotShowNotificationIfVNWTabActive"> <label
+                                for="doNotShowNotificationIfVNWTabActive" msg="doNotShowNotificationIfGmailTabActive">Do
+                            not show notification if you're already in your VietnamWorks tab</label></div>
+                        <br/>
                     </fieldset>
                     <div id="runInBackgroundWrapper">
-                        <input type="checkbox" id="runInBackground" class="singleOption" pref="runInBackground" /> <label for="runInBackground" msg="runInBackground" msgToolTip="runInBackgroundToolTip">Run in background when Google Chrome is closed</label>
+                        <input type="checkbox" id="runInBackground" class="singleOption" pref="runInBackground"/> <label
+                            for="runInBackground" msg="runInBackground" msgToolTip="runInBackgroundToolTip">Run in
+                        background when Google Chrome is closed</label>
                     </div>
+                </div>
+                <div id="content_2" class="tabContent hide">
+                    <fieldset id="emailsSettings" class="options selected" style="-webkit-user-select: none;">
+                        <legend><span msg="emailAccounts">VietnamWorks accounts</span></legend>
+
+                        <div id="accountAddingWrapper" style="margin-bottom:10px">
+                            <div>
+                                <input id="addingMethodAutoDetect" pref="accountAddingMethod"
+                                        name="accountAddingMethod" type="radio" value="autoDetect"
+                                        checked="checked">
+                                <label for="addingMethodAutoDetect" msg="autoDetectAccountsStaySignedIn">Auto-detect
+                                signed in accounts</label>
+                            </div>
+                            <div>
+                                <input id="addingMethodOauth" pref="accountAddingMethod" name="accountAddingMethod"
+                                        type="radio" value="oauth">
+                                <label for="addingMethodOauth" msg="addAccountsStaySignedIn">Add
+                                accounts and stay signed in</label>
+                            </div>
+                        </div>
+                        <div style="width:617px;margin:2px 0 20px 0;padding:0 12px 12px 12px">
+                            <div id="addingMethodOauthExtraPermissionsWarning"
+                                 style="display:none;margin-bottom:8px;color:#444"><a href="#">Additional
+                                permissions</a> are required to add accounts.
+                                <button id="grantPermissionsForAddingMethodOauth" disabled="" class="button">Grant
+                                    permissions
+                                </button>
+                            </div>
+                            <div id="addingAccountsButtons" style="display: none; margin-bottom: 7px;">
+                                <button id="addAccount" class="button" msg="addAccount">Add Account</button>
+                                &nbsp;&nbsp;
+                                <button id="removeAccount" class="button" msg="removeAccount">Remove Account
+                                </button>
+                            </div>
+                            <select id="emails" multiple="">
+                                <option selected="">zhaozun78@gmail.com</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <label msg="pollingInterval" msgtooltip="pollingIntervalTooltip">Polling interval</label>:
+                    <select id="poll" pref="poll">
+                        <option id="poll_15000" value="15000" msg="Xseconds" msgarg1="15">15 seconds</option>
+                        <option id="poll_30000" value="30000" msg="Xseconds" msgarg1="30">30 seconds</option>
+                        <option id="poll_60000" value="60000" msg="Xminute" msgarg1="1">1 minute</option>
+                        <option id="poll_300000" value="300000" msg="Xminutes" msgarg1="5">5 minutes</option>
+                        <option id="poll_900000" value="900000" msg="Xminutes" msgarg1="15">15 minutes</option>
+                        <option id="poll_1800000" value="1800000" msg="Xminutes" msgarg1="30">30 minutes</option>
+                        <option id="poll_3600000" value="3600000" msg="Xhour" msgarg1="1">1 hour</option>
+                        <option id="poll_7200000" value="7200000" msg="Xhours" msgarg1="2">2 hours</option>
+                        <option id="poll_18000000" value="18000000" msg="Xhours" msgarg1="5">5 hours</option>
+                    </select>
+                </div>
+                <div id="content_3" class="tabContent hide">
+                    <div>
+                        <label msg="language">Language</label>:
+                        <select id="languages" pref="language">
+                            <option value="en">English</option>
+                            <option value="vi">Tiếng Việt</option>
+                        </select>
+                    </div>
+                    <fieldset class="options selected" style="margin:15px 0 15px 0">
+                        <legend><span msg="buttonClickAction">Button click action</span></legend>
+                        <div>
+                            <label>
+                                <input type="radio" name="browserButtonAction" pref="browserButtonAction"
+                                       value="checkerPlus" checked="checked">
+                                <span msghtml="openPopupPreview" msgtooltip="openPopupPreviewToolTip">Open search results popup window</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="radio" name="browserButtonAction" pref="browserButtonAction"
+                                           value="gmailInbox">
+                                <span msg="openGmailPopupWindow">Open VietnamWorks search results page in a new tab</span>
+                            </label>
+                        </div>
+                        <br/>
+                        <div id="gmailPopupBrowserButtonActionIfNoEmail" class="browserButtonActionIfNoEmailWrapper">
+                            <span msg="ifNoUnreadMail">If no unread job</span>:
+                            <select pref="gmailPopupBrowserButtonActionIfNoEmail">
+                                <option value="gmailInbox" msg="openGmailPopupWindow">Open job alert setting tab</option>
+                                <option value="checkerPlus" msg="openPopupPreview">Open search results popup window</option>
+                            </select>
+                        </div>
+                        <br/>
+                    </fieldset>
                 </div>
             </div>
         </form>
