@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>VietnamWorks Smart Job Alert Notification - Options</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/common.css"/>
+    <style>
+        body {
+            font-family: arial, sans-serif;
+            font-size: 80%;
+            background: #7B8794;
+            color: #fff;
+        }
+
+        body a, body a:visited {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px dotted #fff
+        }
+
+        body a:hover {
+            border-bottom: 1px solid #fff
+        }
+
+        h1.title {
+            font-size: 20px
+        }
+
+        #main {
+            margin: 0 auto;
+            margin-top: 20px;
+            text-align: center
+        }
+        #main input {margin-top: 5px;}
+        #optionsWrapper a, #optionsWrapper a:visited {border-bottom: 1px dotted black}
+        #optionsWrapper a, #optionsWrapper a:visited, #jMessage a {color:#427fed}
+
+        ul.menu {padding:0;margin:0;list-style-type: none;min-width:100px}
+        ul.menu li {padding: 0;list-style: none;display:inline-block}
+        ul.menu li a {-webkit-transition:background-color .281s;line-height: 25px;border-radius:5px 5px 0 0;padding:6px 8px 8px 8px;border: 0 !important;background: #ddd;font-size:100%;font-weight: bold;color:black !important}
+        ul.menu li a:hover, ul.menu li a.active {background-color:white;color:white;text-shadow:none}
+
+        #tabContentWrapper {min-width:700px;text-align:left;display:inline-block;color:#000;background-color:#fff;box-shadow:3px 3px 5px #555;border-radius:5px;margin:0 auto}
+        .tabContent {min-width:90%;min-height:250px;margin-left:0px;float: left;padding:20px 30px 30px 30px}
+        fieldset {border-radius:5px}
+        legend {padding-right:5px}
+        fieldset.options {padding-bottom:5px;margin-bottom:24px;border:1px solid #ccc;xxbackground: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#f3f3f3));box-shadow:2px 2px 5px #555}
+        fieldset > legend {padding-bottom:5px;border-radius:4px;font-size:120%}
+        fieldset .subOptions input {margin-left:6px}
+
+        .sound {width:130px;display:inline-block}
+        input[type='range'] {height:10px;width:75px}
+        .playWrapper {border:0 !important;padding:9px}
+        .playWrapper:active img {-webkit-filter:drop-shadow(1px 1px 3px #fff)}
+
+    </style>
+</head>
+<body>
+<div id="loading" class="hide"><img src="/images/ajax-loader.gif"/></div>
+<div id="main">
+    <h1 class="title"><img id="headerLogo" style="vertical-align: middle;padding-bottom:2px;"
+                           src="/images/icons/icon_48.png" alt="Icon"/> VietnamWorks Smart Job Alert Notification</h1>
+
+    <div id="optionsWrapper">
+        <form>
+            <ul id="mainMenu" class="menu">
+                <li><a contentID="0" href="#" class="active" msg="notifications">Notifications</a></li>
+                <li><a contentID="1" href="#" msg="accountsAndLabels">Accounts</a></li>
+                <li><a contentID="2" href="#" msg="general">General</a></li>
+            </ul>
+            <div id="tabContentWrapper">
+                <div id="content_0" class="tabContent">
+                    <fieldset class="options">
+                        <legend><input type="checkbox" id="soundNotification" pref="soundNotification"> <label class="section" for='soundNotification' msg="notificationSound">Sound notifications</label></legend>
+                        <div class="subOptions">
+                            <div class="nowrap"><span msg="sound">Sound</span>: <span class='defaultSoundOptionWrapper'>
+                                <select class="sound">
+                                    <option value="bug.ogg">Bug</option>
+                                    <option value="chime.ogg">Chime</option>
+                                    <option value="ding.ogg">Ding</option>
+                                    <option value="electronicdrops.ogg">Electronic drops</option>
+                                    <option value="fallingbeep.ogg">Falling beep</option>
+                                    <option value="pianohappy.ogg">Piano Happy</option>
+                                    <option value="ultranova.ogg">Ultranova</option>
+                                    <option value="whoppii.ogg">Whoppii</option>
+                                    <option value="yeahaha.ogg">Yeahaha</option>
+                                </select>
+                            </span> <span class="rangeLabel" msg="volume">Volume</span>: <input id="notificationSoundVolume" pref="notificationSoundVolume" type="range"> <a id="playNotificationSound" href="javascript:;" title="Play notification sound" class="playWrapper"><img class="play" src="/images/play.png" alt="Play" /></a></div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="options">
+                        <legend><input type="checkbox" id="desktopNotification" pref="desktopNotification"> <label class="section" for='desktopNotification' msg="showDesktopNotifications">Desktop notifications</label></legend>
+                        <div class="subOptions">
+                            <span msg="closeAfterX">Close after</span>:
+                            <select id="dn_timeout" pref="dn_timeout">
+                                <option id="dn_timeout_3000" value="3000" msg="Xseconds" msgarg1="3">3 seconds</option>
+                                <option id="dn_timeout_5000" value="5000" msg="Xseconds" msgarg1="5">5 seconds</option>
+                                <option id="dn_timeout_10000" value="10000" msg="Xseconds" msgarg1="10">10 seconds</option>
+                                <option id="dn_timeout_15000" value="15000" msg="Xseconds" msgarg1="15">15 seconds</option>
+                                <option id="dn_timeout_60000" value="60000" msg="Xminute" msgarg1="1">1 minute</option>
+                                <option id="dn_timeout_900000" value="900000" msg="Xminutes" msgarg1="15">15 minutes</option>
+                                <option id="dn_timeout_3600000" value="3600000" msg="Xhour" msgarg1="1">1 hour</option>
+                                <option id="dn_timeout_18000000" value="18000000" msg="Xhours" msgarg1="5">5 hours</option>
+                                <option id="dn_timeout_0" value="0" msg="never">Never</option>
+                            </select>
+                        </div>
+                        <div class="subOptions"><input type="checkbox" id="doNotShowNotificationIfVNWTabActive" pref="doNotShowNotificationIfVNWTabActive"> <label for="doNotShowNotificationIfVNWTabActive" msg="doNotShowNotificationIfGmailTabActive">Do not show notification if you're already in your VietnamWorks tab</label></div>
+                    </fieldset>
+                    <div id="runInBackgroundWrapper">
+                        <input type="checkbox" id="runInBackground" class="singleOption" pref="runInBackground" /> <label for="runInBackground" msg="runInBackground" msgToolTip="runInBackgroundToolTip">Run in background when Google Chrome is closed</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

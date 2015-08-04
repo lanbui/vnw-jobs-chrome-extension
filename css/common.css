@@ -1,0 +1,3 @@
+.nowrap {white-space:nowrap}
+.hide {display:none} /* Must be at the end of css because the display: -webkit-box etc. seem to override */
+.hideImportant {display:none !important}
