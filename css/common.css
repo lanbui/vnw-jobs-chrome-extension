@@ -76,10 +76,7 @@ ul.menu li a.active {
 }
 .tabContent {
   min-height: 250px;
-  margin-left: 0px;
-  float: left;
   padding: 20px 30px 30px 30px;
-  width: 100%;
 }
 fieldset {
   border-radius: 5px;
@@ -137,4 +134,20 @@ input[type='range'] {
 #content_0 input,
 #content_0 select {
   width: 70%;
+}
+@media (max-width: 768px) {
+  fieldset .subOptions span {
+    width: auto;
+  }
+  #content_0 input,
+  #content_0 select {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    height: 21px;
+  }
+  #content_0 select {
+    height: 25px;
+  }
 }
