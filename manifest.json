@@ -4,6 +4,7 @@
     "name": "VietnamWorks Smart Job Alert Notification",
     "description": "In order to simplify the process of finding dream job, this extension will look for your dream job.",
     "version": "1.0",
+    "default_locale": "en",
 
     "browser_action": {
         "default_icon": {
@@ -26,11 +27,13 @@
         "page": "background.html"
     },
     "permissions": [
-        "activeTab",
+        "contextMenus",
+        "notifications",
         "tabs",
         "alarms",
         "http://*/*",
         "https://*/*"
     ],
-    "optional_permissions": [ "background"]
+    "optional_permissions": [ "background"],
+    "web_accessible_resources": [ "/images/icons/icon_48.png" ]
 }
