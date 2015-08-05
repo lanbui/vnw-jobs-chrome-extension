@@ -13,16 +13,82 @@ db.version(db_version).stores({
 db.open();
 
 $(document).ready(function() {
+    menuActive();
     showSoundNotifications();
     updateSoundNotifications();
     playSoundDemo();
 
     showDesktopNotifications();
     updateDesktopNotifications();
+
+    saveSearchJobCriteria();
+    showSearchJobCriteria();
 });
 
+function showSearchJobCriteria() {
+    db.settings.get('search_criteria').then(function (searchCriteria) {
+        console.log(searchCriteria);
+        if (searchCriteria !== undefined) {
+            $("#searchKeyword").val(searchCriteria.keyword);
+            $("select#searchIndustries option").each(function(){
+                this.selected = (this.value == searchCriteria.industries);
+            });
+
+            $("select#v option").each(function(){
+                this.selected = (this.value == searchCriteria.job_level);
+            })
+
+            $("select#searchLocations option").each(function(){
+                this.selected = (this.value == searchCriteria.job_locations);
+            })
+            $("#searchSalary").val(searchCriteria.salary);
+        }
+    });
+
+}
+
+function saveSearchJobCriteria() {
+    $("#searchSubmitButton").on('click', function() {
+        var keyword = $("#searchKeyword").val();
+        var industry = $("#searchIndustries").find('option:selected').val();
+        var jobLevel = $("#searchJobLevels").find('option:selected').val();
+        var location = $("#searchLocations").find('option:selected').val();
+        var salary = $("#searchSalary").val();
+
+        db.settings.put({
+            keyword: keyword,
+            industries: industry,
+            job_level: jobLevel,
+            job_locations: location,
+            salary: salary
+        }, 'search_criteria');
+    })
+}
+
+function menuActive() {
+    $("#mainMenu a").click(function() {
+        var contentID = $(this).attr("contentID");
+        showContent(contentID);
+    });
+}
+
+function showContent(contentId) {
+
+    $.when( $(".tabContent").fadeOut("fast") ).done(function() {
+        $(".tabContent").eq(contentId).animate({opacity: 'show', height: 'show', xxwidth: 'show'}, 200);
+    });
+
+    $('ul.menu > li > a').each(function(index) {
+        $(this).removeClass('active');
+        if (index == contentId) {
+            $(this).addClass('active');
+            location.href = location.href.split("#")[0]	+ "#" + contentId;
+        }
+    });
+}
+
 function playSoundDemo() {
-    //TODO: Anh Lan handle this
+    //TODO: Anh Lan will handle this
 }
 
 function updateSoundNotifications () {
@@ -61,6 +127,11 @@ function updateSoundNotifications () {
                 volume: volume
             }, 'sound_notifications').then(showSoundNotifications());
         })
+
+        //Update run in background
+        $('#runInBackground').on('change', function () {
+            db.settings.put(this.checked ? 1 : 0, 'run_in_background');
+        });
     } catch (ex) {
         console.log(ex.message);
     }
@@ -76,6 +147,12 @@ function showSoundNotifications () {
         }
 
         loadSoundSettings(isSoundNotification);
+    });
+
+    db.settings.get('run_in_background').then(function(isRunInBackground) {
+        if (isRunInBackground !== undefined || isRunInBackground !== 'NULL') {
+            isRunInBackground ? $('#runInBackground').prop('checked', true) : $('#runInBackground').prop('checked', false);
+        }
     });
 }
 
