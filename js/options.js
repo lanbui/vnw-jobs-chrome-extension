@@ -8,7 +8,7 @@ var db = new Dexie('VNW_V2');
 
 //Database schema
 db.version(db_version).stores({
-    settings: 'key, value'
+    settings: 'key'
 });
 db.open();
 
@@ -56,12 +56,13 @@ function saveSearchJobCriteria() {
         var salary = $("#searchSalary").val();
 
         db.settings.put({
+            key: 'search_criteria',
             keyword: keyword,
             industries: industry,
             job_level: jobLevel,
             job_locations: location,
             salary: salary
-        }, 'search_criteria');
+        });
     })
 }
 
@@ -98,10 +99,11 @@ function updateSoundNotifications () {
             var sound = $('.sound').find('option:selected').val();
             var volume = $('#notificationSoundVolume').val();
             db.settings.put({
+                key: 'sound_notifications',
                 enable_sound: this.checked ? 1 : 0,
                 sound: sound,
                 volume: volume
-            }, 'sound_notifications').then(showSoundNotifications());
+            }).then(showSoundNotifications());
         });
 
         //Update sound
@@ -110,10 +112,11 @@ function updateSoundNotifications () {
             var volume = $('#notificationSoundVolume').val();
 
             db.settings.put({
+                key: 'sound_notifications',
                 enable_sound: 1,
                 sound: sound,
                 volume: volume
-            }, 'sound_notifications').then(showSoundNotifications());
+            }).then(showSoundNotifications());
         });
 
         //Update Volume
@@ -122,15 +125,19 @@ function updateSoundNotifications () {
             var volume = this.value;
 
             db.settings.put({
+                key: 'sound_notifications',
                 enable_sound: 1,
                 sound: sound,
                 volume: volume
-            }, 'sound_notifications').then(showSoundNotifications());
+            }).then(showSoundNotifications());
         })
 
         //Update run in background
         $('#runInBackground').on('change', function () {
-            db.settings.put(this.checked ? 1 : 0, 'run_in_background');
+            db.settings.put({
+                key: 'run_in_background',
+                value: this.checked ? 1 : 0
+            });
         });
     } catch (ex) {
         console.log(ex.message);
@@ -186,28 +193,31 @@ function updateDesktopNotifications() {
     //Update enable Desktop Notification
     $('#desktopNotification').on('change', function() {
         db.settings.put({
+            key: 'desktop_notifications',
             enable_desktop_notification: this.checked ? 1 : 0,
             not_show_notification: $("#doNotShowNotificationIfVNWTabActive").checked ? 1 : 0,
             time_out: $('#dn_timeout').find('option:selected').val()
-        }, 'desktop_notifications').then(showDesktopNotifications());
+        }).then(showDesktopNotifications());
     });
 
     //Update Desktop Notification timeout
     $('#dn_timeout').on('change', function() {
         console.log(this.value);
         db.settings.put({
+            key: 'desktop_notifications',
             enable_desktop_notification: 1,
             not_show_notification: $("#doNotShowNotificationIfVNWTabActive").checked ? 1 : 0,
             time_out: this.value
-        }, 'desktop_notifications').then(showDesktopNotifications());
+        }).then(showDesktopNotifications());
     });
 
     $('#doNotShowNotificationIfVNWTabActive').on('change', function() {
         db.settings.put({
+            key: 'desktop_notifications',
             enable_desktop_notification: 1,
             not_show_notification: this.checked ? 1 : 0,
             time_out: $('#dn_timeout').find('option:selected').val()
-        }, 'desktop_notifications').then(showDesktopNotifications());
+        }).then(showDesktopNotifications());
     });
 }
 
