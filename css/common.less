@@ -1,0 +1,132 @@
+*{ box-sizing:border-box }
+body{
+	font-family:arial, sans-serif;
+	font-size:80%;
+	background:#7B8794;
+	color:#fff;
+}
+body a, body a:visited{
+	color:#fff;
+	text-decoration:none;
+	border-bottom:1px dotted #fff
+}
+body a:hover{
+	border-bottom:1px solid #fff
+}
+h1.title{
+	font-size:20px
+}
+#main{
+	margin:0 auto;
+	margin-top:20px;
+	text-align:center
+}
+#optionsWrapper a, #optionsWrapper a:visited{
+	border-bottom:1px dotted black
+}
+#optionsWrapper a, #optionsWrapper a:visited, #jMessage a{
+	color:#427fed
+}
+ul.menu{
+	padding:0;
+	margin:0;
+	list-style-type:none;
+	min-width:100px
+}
+ul.menu li{
+	padding:0;
+	list-style:none;
+	display:inline-block
+}
+ul.menu li a{
+	-webkit-transition:background-color .281s;
+	line-height:25px;
+	border-radius:5px 5px 0 0;
+	padding:6px 8px 8px 8px;
+	border:0 !important;
+	background:#ddd;
+	font-size:100%;
+	font-weight:bold;
+	color:black !important
+}
+ul.menu li a:hover, ul.menu li a.active{
+	background-color:white;
+	color:white;
+	text-shadow:none
+}
+#tabContentWrapper{
+	text-align:left;
+	display:inline-block;
+	color:#333;
+	background-color:#fff;
+	box-shadow:3px 3px 5px #555;
+	border-radius:5px;
+	margin:0 auto;
+	width:700px;
+	min-height:400px;
+}
+.tabContent{
+	min-height:250px;
+	padding:20px 30px 30px 30px;
+}
+fieldset{
+	border-radius:5px;
+}
+legend{
+	padding-right:5px;
+	font-weight:bold;
+}
+fieldset.options{
+	padding-bottom:5px;
+	margin-bottom:24px;
+	border:1px solid #ccc;
+	xxbackground:-webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#f3f3f3));
+	box-shadow:2px 2px 5px #ccc
+}
+fieldset > legend{
+	padding-bottom:5px;
+	border-radius:4px;
+	font-size:120%;
+}
+fieldset .subOptions{ margin-bottom:10px; }
+#content_0{
+	#searchSubmitButton{ width:130px; }
+	.subOptions span{ width:150px; display:inline-block; }
+}
+.sound{
+	width:130px;
+	display:inline-block
+}
+input[type='range']{
+	height:10px;
+	width:75px
+}
+input[type="text"], input[type="number"], select{
+	border:1px solid #ccc;
+	height:30px;
+}
+input[type="text"], input[type="number"]{
+	padding:0 3px;
+}
+.playWrapper{
+	border:0 !important;
+	padding:9px
+}
+.playWrapper:active img{ -webkit-filter:drop-shadow(1px 1px 3px #fff) }
+#emails{ width:100%; min-height:150px; }
+.nowrap{ white-space:nowrap }
+.hide{ display:none }
+/* Must be at the end of css because the display: -webkit-box etc. seem to override */
+.hideImportant{ display:none !important }
+#content_0{
+	input, select{ width:70%; }
+}
+//Extreme small screen | Screen < 768px
+@media (max-width:768px){
+	fieldset .subOptions span{ width:auto; }
+	#content_0 input, #content_0 select{
+		width:100%; display:block; margin-bottom:10px; margin-top:5px; height:21px;
+	}
+	#content_0 select{ height:25px; }
+}
+

@@ -24,9 +24,6 @@ h1.title {
   margin-top: 20px;
   text-align: center;
 }
-#main input {
-  margin-top: 5px;
-}
 #optionsWrapper a,
 #optionsWrapper a:visited {
   border-bottom: 1px dotted black;
@@ -67,12 +64,13 @@ ul.menu li a.active {
 #tabContentWrapper {
   text-align: left;
   display: inline-block;
-  color: #000;
+  color: #333;
   background-color: #fff;
   box-shadow: 3px 3px 5px #555;
   border-radius: 5px;
   margin: 0 auto;
-  max-width: 700px;
+  width: 700px;
+  min-height: 400px;
 }
 .tabContent {
   min-height: 250px;
@@ -83,13 +81,14 @@ fieldset {
 }
 legend {
   padding-right: 5px;
+  font-weight: bold;
 }
 fieldset.options {
   padding-bottom: 5px;
   margin-bottom: 24px;
   border: 1px solid #ccc;
   xxbackground: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#f3f3f3));
-  box-shadow: 2px 2px 5px #555555;
+  box-shadow: 2px 2px 5px #cccccc;
 }
 fieldset > legend {
   padding-bottom: 5px;
@@ -97,9 +96,12 @@ fieldset > legend {
   font-size: 120%;
 }
 fieldset .subOptions {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
-fieldset .subOptions span {
+#content_0 #searchSubmitButton {
+  width: 130px;
+}
+#content_0 .subOptions span {
   width: 150px;
   display: inline-block;
 }
@@ -111,6 +113,16 @@ input[type='range'] {
   height: 10px;
   width: 75px;
 }
+input[type="text"],
+input[type="number"],
+select {
+  border: 1px solid #ccc;
+  height: 30px;
+}
+input[type="text"],
+input[type="number"] {
+  padding: 0 3px;
+}
 .playWrapper {
   border: 0 !important;
   padding: 9px;
@@ -120,6 +132,7 @@ input[type='range'] {
 }
 #emails {
   width: 100%;
+  min-height: 150px;
 }
 .nowrap {
   white-space: nowrap;
