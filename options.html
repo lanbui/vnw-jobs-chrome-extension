@@ -3,145 +3,8 @@
 <head lang="en">
     <title>VietnamWorks Smart Job Alert Notification - Options</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/common.css"/>
-    <style>
-        body {
-            font-family: arial, sans-serif;
-            font-size: 80%;
-            background: #7B8794;
-            color: #fff;
-        }
-
-        body a, body a:visited {
-            color: #fff;
-            text-decoration: none;
-            border-bottom: 1px dotted #fff
-        }
-
-        body a:hover {
-            border-bottom: 1px solid #fff
-        }
-
-        h1.title {
-            font-size: 20px
-        }
-
-        #main {
-            margin: 0 auto;
-            margin-top: 20px;
-            text-align: center
-        }
-
-        #main input {
-            margin-top: 5px;
-        }
-
-        #optionsWrapper a, #optionsWrapper a:visited {
-            border-bottom: 1px dotted black
-        }
-
-        #optionsWrapper a, #optionsWrapper a:visited, #jMessage a {
-            color: #427fed
-        }
-
-        ul.menu {
-            padding: 0;
-            margin: 0;
-            list-style-type: none;
-            min-width: 100px
-        }
-
-        ul.menu li {
-            padding: 0;
-            list-style: none;
-            display: inline-block
-        }
-
-        ul.menu li a {
-            -webkit-transition: background-color .281s;
-            line-height: 25px;
-            border-radius: 5px 5px 0 0;
-            padding: 6px 8px 8px 8px;
-            border: 0 !important;
-            background: #ddd;
-            font-size: 100%;
-            font-weight: bold;
-            color: black !important
-        }
-
-        ul.menu li a:hover, ul.menu li a.active {
-            background-color: white;
-            color: white;
-            text-shadow: none
-        }
-
-        #tabContentWrapper {
-            min-width: 700px;
-            text-align: left;
-            display: inline-block;
-            color: #000;
-            background-color: #fff;
-            box-shadow: 3px 3px 5px #555;
-            border-radius: 5px;
-            margin: 0 auto
-        }
-
-        .tabContent {
-            min-width: 90%;
-            min-height: 250px;
-            margin-left: 0px;
-            float: left;
-            padding: 20px 30px 30px 30px
-        }
-
-        fieldset {
-            border-radius: 5px
-        }
-
-        legend {
-            padding-right: 5px
-        }
-
-        fieldset.options {
-            padding-bottom: 5px;
-            margin-bottom: 24px;
-            border: 1px solid #ccc;
-            xxbackground: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#f3f3f3));
-            box-shadow: 2px 2px 5px #555
-        }
-
-        fieldset > legend {
-            padding-bottom: 5px;
-            border-radius: 4px;
-            font-size: 120%
-        }
-
-        fieldset .subOptions input {
-            margin-left: 6px
-        }
-
-        .sound {
-            width: 130px;
-            display: inline-block
-        }
-
-        input[type='range'] {
-            height: 10px;
-            width: 75px
-        }
-
-        .playWrapper {
-            border: 0 !important;
-            padding: 9px
-        }
-
-        .playWrapper:active img {
-            -webkit-filter: drop-shadow(1px 1px 3px #fff)
-        }
-
-    </style>
-
-
+    <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css"/>
     <script type="text/javascript" src="js/lib/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="js/lib/Dexie.js"></script>
     <script type="text/javascript" src="js/constants.js"></script>
@@ -162,7 +25,7 @@
                 <li><a contentID="3" href="#" msg="general">General</a></li>
             </ul>
             <div id="tabContentWrapper">
-                <div id="content_0" class="tabContent" style="display: none;">
+                <div id="content_0" class="tabContent hide">
                     <fieldset class="options">
                         <legend><span msg="searchCondition">Conditions</span></legend>
                         <div class="subOptions">
@@ -406,7 +269,7 @@
                                 accounts and stay signed in</label>
                             </div>
                         </div>
-                        <div style="width:617px;margin:2px 0 20px 0;padding:0 12px 12px 12px">
+                        <div style="margin:2px 0 20px 0;padding:0 12px 12px 12px">
                             <div id="addingMethodOauthExtraPermissionsWarning"
                                  style="display:none;margin-bottom:8px;color:#444"><a href="#">Additional
                                 permissions</a> are required to add accounts.
