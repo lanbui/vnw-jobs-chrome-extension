@@ -30,11 +30,11 @@
                         <legend><span msg="searchCondition">Conditions</span></legend>
                         <div class="subOptions">
                             <span>Notify Me Whenever</span>
-                            <input >
+                            <input type="text" id="searchKeyword" />
                         </div>
                         <div class="subOptions">
                             <span>Jobs In (Category)*</span>
-                            <select>
+                            <select id="searchIndustries">
                                 <option value="0">All categories</option>
                                 <option value="1">Accounting</option>
                                 <option value="58">Auditing</option>
@@ -97,7 +97,7 @@
                         </div>
                         <div class="subOptions">
                             <span>Job Level*</span>
-                            <select>
+                            <select id="searchJobLevels">
                                 <option value="0" selected="selected">All job levels</option>
                                 <option value="1">New Grad/Entry Level/Internship</option>
                                 <option value="5">Experienced (Non-Manager)</option>
@@ -112,7 +112,7 @@
                         </div>
                         <div class="subOptions">
                             <span>That Are Located In</span>
-                            <select>
+                            <select id="searchLocations">
                                 <option value="0">All locations</option>
                                 <option value="29">Ho Chi Minh</option>
                                 <option value="24">Ha Noi</option>
@@ -186,10 +186,13 @@
                         </div>
                         <div class="subOptions">
                             <span>With Salary Of</span>
-                            <input >
+                            <input type="number" id="searchSalary">
                         </div>
                         <br />
                     </fieldset>
+                    <div style="text-align: center">
+                        <input type="button" id="searchSubmitButton" value="Search data" />
+                    </div>
                 </div>
                 <div id="content_1" class="tabContent" style="display: block">
                     <fieldset class="options">
