@@ -157,7 +157,7 @@ function initNotificationSound() {
 }
 
 function initDisplayForAccountAddingMethod() {
-    if (Settings.read(accountAddingMethod) != 'autoDetect') {
+    if (Settings.read('accountAddingMethod') != 'autoDetect') {
         $("#signInToYourAccount").remove();
     }
 }
@@ -207,5 +207,4 @@ $(document).ready(function() {
     menuActive();
     initNotificationSound();
     initDisplayForAccountAddingMethod();
-
 });
