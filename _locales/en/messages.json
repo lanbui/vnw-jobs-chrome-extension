@@ -1,0 +1,131 @@
+{
+    "jobAlert": {
+        "message": "Job Alert"
+    },
+    "notifications": {
+        "message": "Notifications"
+    },
+    "accounts": {
+        "message": "Accounts"
+    },
+    "general": {
+        "message": "General"
+    },
+    "searchCondition": {
+        "message": "Conditions"
+    },
+    "notifyMeWhenever": {
+        "message": "Notify Me Whenever"
+    },
+    "jobsInCategory": {
+        "message": "Jobs In (Category) <strong style='color:red;'>*</strong>"
+    },
+    "jobLevel": {
+        "message": "Job Level <strong style='color:red;'>*</strong>"
+    },
+    "jobsAreLocatedIn": {
+        "message": "That Are Located In"
+    },
+    "jobsWithSalaryOf": {
+        "message": "With Salary Of"
+    },
+    "searchJobsNow": {
+        "message": "Search Jobs Now"
+    },
+    "notificationSound": {
+        "message": "Sound notifications"
+    },
+    "sound": {
+        "message": "Sound"
+    },
+    "volume": {
+        "message": "Volume"
+    },
+    "showDesktopNotifications": {
+        "message": "Desktop notifications"
+    },
+    "closeAfterX": {
+        "message": "Close after"
+    },
+    "Xseconds": {
+        "message": "$1 seconds"
+    },
+    "Xminute": {
+        "message": "$1 minute"
+    },
+    "Xminutes": {
+        "message": "$1 minutes"
+    },
+    "Xhour": {
+        "message": "$1 hour"
+    },
+    "Xhours": {
+        "message": "$1 hours"
+    },
+    "never": {
+        "message": "Never"
+    },
+    "doNotShowNotificationIfVNWTabActive": {
+        "message": "Do not show notification if you're already in your VietnamWorks tab"
+    },
+    "runInBackground": {
+        "message": "Run in background when Google Chrome is closed"
+    },
+    "emailAccounts": {
+        "message": "VietnamWorks accounts"
+    },
+    "anonymous": {
+        "message": "Anonymous"
+    },
+    "autoDetectAccountsStaySignedIn": {
+        "message": "Auto-detect signed in accounts"
+    },
+    "addAccountsStaySignedIn": {
+        "message": "Add accounts and stay signed in"
+    },
+    "addAccount": {
+        "message": "Add Account"
+    },
+    "removeAccount": {
+        "message": "Remove Account"
+    },
+    "pollingInterval": {
+        "message": "Polling interval"
+    },
+    "language": {
+        "message": "Language"
+    },
+    "buttonClickAction": {
+        "message": "Button click action"
+    },
+    "openPopupPreview": {
+        "message": "Open job preview popup window"
+    },
+    "openWNWSearchResultsPage": {
+        "message": "Open VietnamWorks search results page in a new tab"
+    },
+    "ifNoUnreadMail": {
+        "message": "If no unread job"
+    },
+    "openJobAlertSetting": {
+        "message": "Open job alert setting tab"
+    },
+    "openPopupPreview": {
+        "message": "Open job preview popup window"
+    },
+    "doNotDisturb": {
+        "message": "Do Not Disturb"
+    },
+    "turnOff": {
+        "message": "Turn off"
+    },
+    "today": {
+        "message": "Today"
+    },
+    "indefinitely": {
+        "message": "Indefinitely"
+    },
+    "signInToYourAccount": {
+        "message": "Sign in to your account(s) first then reload this page!"
+    }
+}

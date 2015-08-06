@@ -2,7 +2,11 @@ var localeMessages;
 var notification;
 var notificationAudio;
 var lastNotificationAudioSource;
+var loadedSettings = false;
 
+function getSettings() {
+    return Settings;
+}
 function showNotification() {
     if (Notification.permission === 'granted') {
         notification = new Notification("Urgent! Unity Game Developer - High Salary", {body:"Evolable Asia \n4F Saigon Finance Center, No. 9 Dinh Tien Hoang St., Dist 1, HCMC", icon:"/images/icons/icon_48.png"});
@@ -36,13 +40,13 @@ function playNotificationSound(source) {
             }
         });
         if (!source) {
-            source = 'chime.ogg';
+            source = Settings.read('sound_audio');
         }
         if (lastNotificationAudioSource != source) {
             notificationAudio.src = "/sounds/" + source;
         }
         lastNotificationAudioSource = source;
-        notificationAudio.volume = 100 / 100;
+        notificationAudio.volume = Settings.read('notificationSoundVolume') / 100;
         notificationAudio.play();
     } catch (e) {
         logError("sound error: " + e);
@@ -64,7 +68,7 @@ function initContextMemu() {
         chrome.contextMenus.create({title: getMessage("Xhour", 1), contexts: ["browser_action"], parentId:doNotDisturbMenuId, onclick:function() {
             setDND_minutes(60);
         }});
-        chrome.contextMenus.create({title: getMessage("Xhour", 2), contexts: ["browser_action"], parentId:doNotDisturbMenuId, onclick:function() {
+        chrome.contextMenus.create({title: getMessage("Xhours", 2), contexts: ["browser_action"], parentId:doNotDisturbMenuId, onclick:function() {
             setDND_minutes(120);
         }});
         chrome.contextMenus.create({title: getMessage("Xhours", 4), contexts: ["browser_action"], parentId:doNotDisturbMenuId, onclick:function() {
@@ -85,6 +89,8 @@ function init() {
 
     Settings.load(function() {
         initContextMemu();
+
+        loadedSettings = true;
     });
 }
 

@@ -13,6 +13,7 @@ function chromeGetMessage(messageID, args) {
     }
     return chrome.i18n.getMessage(messageID, args);
 }
+
 function getMessage(messageID, args) {
     if (messageID) {
         if (bg.localeMessages) {

@@ -1,80 +1,168 @@
-/**
- * Created by tuanna on 8/4/2015.
- */
+var Settings;
 
-//Init database
-var db_version = Dexie.version;
-var db = new Dexie('VNW_V2');
+if (bg.getSettings) {
+    Settings = bg.getSettings();
+}
 
-//Database schema
-db.version(db_version).stores({
-    settings: 'key'
-});
-db.open();
-
-$(document).ready(function() {
-    menuActive();
-    showSoundNotifications();
-    updateSoundNotifications();
-    playSoundDemo();
-
-    showDesktopNotifications();
-    updateDesktopNotifications();
-
-    saveSearchJobCriteria();
-    showSearchJobCriteria();
-});
-
-function showSearchJobCriteria() {
-    db.settings.get('search_criteria').then(function (searchCriteria) {
-        console.log(searchCriteria);
-        if (searchCriteria !== undefined) {
-            $("#searchKeyword").val(searchCriteria.keyword);
-            $("select#searchIndustries option").each(function(){
-                this.selected = (this.value == searchCriteria.industries);
-            });
-
-            $("select#v option").each(function(){
-                this.selected = (this.value == searchCriteria.job_level);
-            })
-
-            $("select#searchLocations option").each(function(){
-                this.selected = (this.value == searchCriteria.job_locations);
-            })
-            $("#searchSalary").val(searchCriteria.salary);
+function initMessages(node) {
+    var selector;
+    if (node) {
+        selector = node;
+    } else {
+        selector = "*";
+    }
+    $(selector).each(function() {
+        //var parentMsg = $(this);
+        var attr = $(this).attr("msg");
+        if (attr) {
+            var msgArg1 = $(this).attr("msgArg1");
+            if (msgArg1) {
+                $(this).text(getMessage( $(this).attr("msg"), msgArg1 ));
+                var msgArg2 = $(this).attr("msgArg2");
+                if (msgArg2) {
+                    $(this).text(getMessage( $(this).attr("msg"), [msgArg1, msgArg2] ));
+                }
+            } else {
+                // look for inner msg nodes to replace before...
+                var innerMsg = $(this).find("*[msg]");
+                if (innerMsg.length > 0) {
+                    initMessages(innerMsg);
+                    var msgArgs = [];
+                    innerMsg.each(function(index, element) {
+                        msgArgs.push( $(this).get(0).outerHTML );
+                    });
+                    $(this).html(getMessage(attr, msgArgs));
+                } else {
+                    $(this).text(getMessage(attr));
+                }
+            }
+        }
+        attr = $(this).attr("msgTitle");
+        if (attr) {
+            var msgArg1 = $(this).attr("msgTitleArg1");
+            if (msgArg1) {
+                $(this).attr("title", getMessage( $(this).attr("msgTitle"), msgArg1 ));
+            } else {
+                $(this).attr("title", getMessage(attr));
+            }
+        }
+        attr = $(this).attr("msgLabel");
+        if (attr) {
+            var msgArg1 = $(this).attr("msgLabelArg1");
+            if (msgArg1) {
+                $(this).attr("label", getMessage( $(this).attr("msgLabel"), msgArg1 ));
+            } else {
+                $(this).attr("label", getMessage(attr));
+            }
+        }
+        attr = $(this).attr("msgText");
+        if (attr) {
+            var msgArg1 = $(this).attr("msgTextArg1");
+            if (msgArg1) {
+                $(this).attr("text", getMessage( $(this).attr("msgText"), msgArg1 ));
+            } else {
+                $(this).attr("text", getMessage(attr));
+            }
+        }
+        attr = $(this).attr("msgSrc");
+        if (attr) {
+            $(this).attr("src", getMessage(attr));
+        }
+        attr = $(this).attr("msgValue");
+        if (attr) {
+            $(this).attr("value", getMessage(attr));
+        }
+        attr = $(this).attr("msgPlaceholder");
+        if (attr) {
+            $(this).attr("placeholder", getMessage(attr));
+        }
+        attr = $(this).attr("msgHTML");
+        if (attr) {
+            $(this).html(getMessage(attr));
+        }
+        attr = $(this).attr("msgHALIGN");
+        if (attr) {
+            if ($("html").attr("dir") == "rtl" && attr == "right") {
+                $(this).attr("halign", "left");
+            } else {
+                $(this).attr("halign", attr);
+            }
         }
     });
-
 }
 
-function saveSearchJobCriteria() {
-    $("#searchSubmitButton").on('click', function() {
-        var keyword = $("#searchKeyword").val();
-        var industry = $("#searchIndustries").find('option:selected').val();
-        var jobLevel = $("#searchJobLevels").find('option:selected').val();
-        var location = $("#searchLocations").find('option:selected').val();
-        var salary = $("#searchSalary").val();
+function initPrefAttributes() {
+    $("select[pref], input[pref], textarea[pref]").each(function(index) {
 
-        db.settings.put({
-            key: 'search_criteria',
-            keyword: keyword,
-            industries: industry,
-            job_level: jobLevel,
-            job_locations: location,
-            salary: salary
-        });
-    })
-}
+        var key = $(this).attr("pref");
+        var prefValue = Settings.read(key);
 
-function menuActive() {
-    $("#mainMenu a").click(function() {
-        var contentID = $(this).attr("contentID");
-        showContent(contentID);
+        if (this.tagName == "INPUT") {
+            if ($(this).attr("type") == "checkbox") {
+                $(this).attr("checked", prefValue);
+                $(this).change(function(event) {
+                    Settings.store(key, this.checked);
+                });
+            } else if ($(this).attr("type") == "radio") {
+                if ($(this).val() == prefValue) {
+                    $(this).attr("checked", "true");
+                }
+                $(this).change(function(event) {
+                    Settings.store(key,  $(this).val());
+                });
+            } else if ($(this).attr("type") == "text" || $(this).attr("type") == "number") {
+                if (prefValue !== false) {
+                    $(this).val(prefValue);
+                }
+                $(this).change(function() {
+                    Settings.store(key,  $(this).val());
+                });
+            } else if ($(this).attr("type") == "range") {
+                $(this).val(prefValue);
+                $(this).change(function() {
+                    Settings.store(key,  $(this).val());
+                });
+            }
+        } else if (this.tagName == "SELECT") {
+            $(this).val(prefValue);
+            $(this).change(function() {
+                Settings.store(key,  $(this).val());
+            });
+        } else if (this.tagName == "TEXTAREA") {
+            if (prefValue) {
+                $(this).val(prefValue);
+            }
+            $(this).blur(function() {
+                Settings.store(key,  $(this).val());
+            });
+        }
     });
+}
+
+function initNotificationSound() {
+    $select = $("#soundAudios");
+    $val = Settings.read('sound_audio');
+    $select.off("change")
+        .val($val)
+        .on("change", function() {
+            bg.playNotificationSound($(this).val());
+            Settings.store("sound_audio", $(this).val());
+            $(this).blur();
+        })
+    ;
+
+    $("#playNotificationSound").click(function() {
+        bg.playNotificationSound();
+    });
+}
+
+function initDisplayForAccountAddingMethod() {
+    if (Settings.read(accountAddingMethod) != 'autoDetect') {
+        $("#signInToYourAccount").remove();
+    }
 }
 
 function showContent(contentId) {
-
     $.when( $(".tabContent").fadeOut("fast") ).done(function() {
         $(".tabContent").eq(contentId).animate({opacity: 'show', height: 'show', xxwidth: 'show'}, 200);
     });
@@ -88,150 +176,36 @@ function showContent(contentId) {
     });
 }
 
-function playSoundDemo() {
-    //TODO: Anh Lan will handle this
-}
-
-function updateSoundNotifications () {
-    try {
-        //Update enable sound Notification
-        $('#soundNotification').on('change', function () {
-            var sound = $('.sound').find('option:selected').val();
-            var volume = $('#notificationSoundVolume').val();
-            db.settings.put({
-                key: 'sound_notifications',
-                enable_sound: this.checked ? 1 : 0,
-                sound: sound,
-                volume: volume
-            }).then(showSoundNotifications());
-        });
-
-        //Update sound
-        $('.sound').on('change', function () {
-            var sound = this.value;
-            var volume = $('#notificationSoundVolume').val();
-
-            db.settings.put({
-                key: 'sound_notifications',
-                enable_sound: 1,
-                sound: sound,
-                volume: volume
-            }).then(showSoundNotifications());
-        });
-
-        //Update Volume
-        $('#notificationSoundVolume').on('change', function () {
-            var sound = $('.sound').find('option:selected').val();
-            var volume = this.value;
-
-            db.settings.put({
-                key: 'sound_notifications',
-                enable_sound: 1,
-                sound: sound,
-                volume: volume
-            }).then(showSoundNotifications());
-        })
-
-        //Update run in background
-        $('#runInBackground').on('change', function () {
-            db.settings.put({
-                key: 'run_in_background',
-                value: this.checked ? 1 : 0
-            });
-        });
-    } catch (ex) {
-        console.log(ex.message);
+function menuActive() {
+    $("#mainMenu a").click(function() {
+        var contentID = $(this).attr("contentID");
+        showContent(contentID);
+    });
+    var contentID = location.href.split("#")[1];
+    if (contentID != null) {
+        showContent(contentID);
     }
 }
 
-function showSoundNotifications () {
-    //Get information from db
-    db.settings.get('sound_notifications').then(function(isSoundNotification) {
-        if (isSoundNotification !== undefined) {
-            $('.sound').prop("disabled", !isSoundNotification.enable_sound);
-            $('#notificationSoundVolume').prop("disabled", !isSoundNotification.enable_sound);
-            $('#playNotificationSound').prop("hidden", !isSoundNotification.enable_sound);
-        }
+$(document).ready(function() {
+    if (!bg.loadedSettings) {
+        $("body").empty().append( getMessage("loadingSettings") + "..." );
+        setInterval(function() {
+            if (bg.loadedSettings) {
+                location.reload();
+            }
+        }, 500);
 
-        loadSoundSettings(isSoundNotification);
-    });
-
-    db.settings.get('run_in_background').then(function(isRunInBackground) {
-        if (isRunInBackground !== undefined || isRunInBackground !== 'NULL') {
-            isRunInBackground ? $('#runInBackground').prop('checked', true) : $('#runInBackground').prop('checked', false);
-        }
-    });
-}
-
-function loadSoundSettings(isSoundNotification) {
-    if (isSoundNotification !== undefined) {
-        isSoundNotification.enable_sound ? $("#soundNotification").prop('checked', true) : $("#soundNotification").prop('checked', false);
-        $("select.sound option")
-            .each(function() { this.selected = (this.value == isSoundNotification.sound); });
-        $('#notificationSoundVolume').val(isSoundNotification.volume);
-    } else {
-        $("#soundNotification").prop('checked', defaultSettings.ENABLE_SOUND);
-        $("select.sound option")
-            .each(function() { this.selected = (this.value == defaultSettings.SOUND); });
-        $('#notificationSoundVolume').val(defaultSettings.VOLUME);
+        // too long
+        setTimeout(function() {
+            $("body").append("This is taking too long.");
+        }, 3000);
+        return;
     }
-}
+    initMessages();
+    initPrefAttributes();
+    menuActive();
+    initNotificationSound();
+    initDisplayForAccountAddingMethod();
 
-function showDesktopNotifications() {
-    //Get information from db
-    db.settings.get('desktop_notifications').then(function(isDesktopNotification) {
-        if (isDesktopNotification !== undefined) {
-            $("#doNotShowNotificationIfVNWTabActive").prop('disabled', !isDesktopNotification.enable_desktop_notification);
-            $('#dn_timeout').prop('disabled', !isDesktopNotification.enable_desktop_notification);
-        }
-
-        loadDesktopSettings(isDesktopNotification);
-    });
-}
-
-function updateDesktopNotifications() {
-    //Update enable Desktop Notification
-    $('#desktopNotification').on('change', function() {
-        db.settings.put({
-            key: 'desktop_notifications',
-            enable_desktop_notification: this.checked ? 1 : 0,
-            not_show_notification: $("#doNotShowNotificationIfVNWTabActive").checked ? 1 : 0,
-            time_out: $('#dn_timeout').find('option:selected').val()
-        }).then(showDesktopNotifications());
-    });
-
-    //Update Desktop Notification timeout
-    $('#dn_timeout').on('change', function() {
-        console.log(this.value);
-        db.settings.put({
-            key: 'desktop_notifications',
-            enable_desktop_notification: 1,
-            not_show_notification: $("#doNotShowNotificationIfVNWTabActive").checked ? 1 : 0,
-            time_out: this.value
-        }).then(showDesktopNotifications());
-    });
-
-    $('#doNotShowNotificationIfVNWTabActive').on('change', function() {
-        db.settings.put({
-            key: 'desktop_notifications',
-            enable_desktop_notification: 1,
-            not_show_notification: this.checked ? 1 : 0,
-            time_out: $('#dn_timeout').find('option:selected').val()
-        }).then(showDesktopNotifications());
-    });
-}
-
-function loadDesktopSettings(isDesktopNotification) {
-    if (isDesktopNotification !== undefined) {
-        isDesktopNotification.enable_desktop_notification ? $('#desktopNotification').prop('checked', true) : $("#desktopNotification").prop('checked', false);
-        $("select#dn_timeout option").each(function(){
-            this.selected = (this.value == isDesktopNotification.time_out);
-        })
-        isDesktopNotification.not_show_notification ? $('#doNotShowNotificationIfVNWTabActive').prop('checked', true) : $("#doNotShowNotificationIfVNWTabActive").prop('checked', false);
-    } else {
-        $("#desktopNotification").prop('checked', defaultSettings.ENABLE_DN);
-        $("#doNotShowNotificationIfVNWTabActive").prop('checked', defaultSettings.VNW_NOT_SHOW_DN);
-        $("select#dn_timeout option")
-            .each(function() { this.selected = (this.value == defaultSettings.DN_TIMEOUT); });
-    }
-}
+});

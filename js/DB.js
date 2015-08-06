@@ -3,9 +3,9 @@ Dexie.Promise.on('error', function(e) {
     console.log('Uncaught database error: ' + e);
 });
 
-wrappedDB.version(2).stores({
-    settings: 'key, value',
-    jobs: 'jobId, jobTitle, companyName'
+wrappedDB.version(1).stores({
+    settings: 'key',
+    jobs: 'jobId, unRead'
 });
 
 wrappedDB.on('blocked', function() {

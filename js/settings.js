@@ -12,7 +12,9 @@ var Settings = function() {
     }
 
     Settings.defaults = {
-
+        "desktopNotification": true,
+        "sound_audio": 'chime.ogg',
+        "notificationSoundVolume": 100
     };
     Settings.load = function(cb) {
         loadFromDB(cb);
@@ -28,7 +30,7 @@ var Settings = function() {
     Settings.store = function(key, value) {
         cache[key] = value;
         return wrappedDB.transaction('rw', wrappedDB.settings, function() {
-            wrappedDB.settings.put(value, key);
+            wrappedDB.settings.put({ key: key, value: value });
         });
     };
     Settings.delete = function(key) {
@@ -38,3 +40,4 @@ var Settings = function() {
         });
     };
 };
+Settings();
