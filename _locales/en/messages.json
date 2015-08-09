@@ -127,5 +127,11 @@
     },
     "signInToYourAccount": {
         "message": "Sign in to your account(s) first then reload this page!"
+    },
+    "createNewAccount": {
+        "message": "Create New Account"
+    },
+    "refresh": {
+        "message": "Refresh"
     }
 }

@@ -52,10 +52,52 @@ function playNotificationSound(source) {
         logError("sound error: " + e);
     }
 }
+function updateBadge(totalUnread) {
+    // TODO:
+}
+function setDNDEndTime(endTime) {
+    Settings.store("DND_endTime", endTime);
+    updateBadge();
+}
+function setDND_off() {
+    Settings.delete("DND_endTime");
+    updateBadge();
+}
+function setDND_minutes(minutes) {
+    var dateOffset = new Date();
+    dateOffset.setMinutes(dateOffset.getMinutes() + parseInt(minutes));
+    setDNDEndTime(dateOffset);
+}
+
+function setDND_today() {
+    var tom = new Date();
+    tom.setDate(tom.getDate() + 1);
+    tom.setHours(7);
+    tom.setMinutes(0);
+    setDNDEndTime(tom);
+}
+function setDND_indefinitely() {
+    var farOffDate = new Date();
+    farOffDate.setYear(2999);
+    setDNDEndTime(farOffDate);
+}
+
+function isDNDbyDuration() {
+    var endTime = Settings.read("DND_endTime");
+    return endTime && endTime.getTime() >= (new Date()).getTime();
+}
 
 function initContextMemu() {
     var lang = window.navigator.language;
     if (chrome.contextMenus) {
+        chrome.contextMenus.create({title: getMessage("createNewAccount"), contexts: ["browser_action"], onclick:function() {
+            // TODO:
+        }});
+        chrome.contextMenus.create({title: getMessage("refresh"), contexts: ["browser_action"], onclick:function() {
+            chrome.browserAction.setBadgeText({ text: "..." });
+            // TODO:
+        }});
+
         var doNotDisturbMenuId = chrome.contextMenus.create({title: getMessage("doNotDisturb"), contexts: ["browser_action"]});
         chrome.contextMenus.create({title: getMessage("turnOff"), contexts: ["browser_action"], parentId:doNotDisturbMenuId, onclick:function() {
             setDND_off();

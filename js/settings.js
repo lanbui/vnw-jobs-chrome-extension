@@ -12,9 +12,17 @@ var Settings = function() {
     }
 
     Settings.defaults = {
-        "desktopNotification": true,
+        "soundNotification": true,
         "sound_audio": 'chime.ogg',
-        "notificationSoundVolume": 100
+        "notificationSoundVolume": 100,
+        "desktopNotification": true,
+        "dn_timeout": 5000,
+        "runInBackground": true,
+        "accountAddingMethod": "anonymous",
+        "poll": 900000,
+        "language": "en",
+        "browserButtonAction": "jobPreview",
+        "popupBrowserButtonActionIfNoEmail": "jobAlertSetting"
     };
     Settings.load = function(cb) {
         loadFromDB(cb);
